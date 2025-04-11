@@ -1,0 +1,20 @@
+{
+    "name": "sink-ch",
+    "config": {
+        "connector.class": "com.clickhouse.kafka.connect.ClickHouseSinkConnector",
+        "tasks.max": 1,
+        "topics": "db1.public.t_user",
+        "hostname": "ch",
+        "port": 8123,
+        "database": "db_name",
+        "username": "user",
+        "password": "pass",
+        "value.converter.schemas.enable": true,
+        "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+        "schemas.enable": false,
+        "consumer.override.max.poll.records": "5000",
+        "consumer.override.max.partition.fetch.bytes": "5242880",
+        "topic2TableMap": "db1.public.t_user=t_user",
+        "dateTimeFormats": "created_at=yyyy-MM-dd HH:mm:ss,updated_at=yyyy-MM-dd HH:mm:ss,"
+    }
+}

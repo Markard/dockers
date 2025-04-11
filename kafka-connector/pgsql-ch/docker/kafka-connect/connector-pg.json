@@ -1,0 +1,25 @@
+{
+    "name": "connector-pg",
+    "config": {
+        "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+        "database.hostname": "pg",
+        "database.port": "5432",
+        "database.user": "kc_user",
+        "database.password": "kc_pass",
+        "database.dbname": "db_name",
+        "topic.prefix": "db1",
+        "table.include.list": "public.t_user",
+        "snapshot.mode": "always",
+        "schema.history.internal.store.only.captured.tables.ddl": true,
+        "schema.history.internal.store.only.captured.databases.ddl": true,
+        "heartbeat.interval.ms": "5000",
+        "message.key.columns": "public.t_user:id",
+        "transforms": "unwrap",
+        "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+        "transforms.unwrap.delete.handling.mode":"rewrite",
+        "schema.history.internal.kafka.bootstrap.servers": "kafka-1:19092",
+        "schema.history.internal.kafka.topic": "schema-changes.t_user",
+        "topic.creation.default.partitions": 1,
+        "topic.creation.default.replication.factor": 1
+    }
+}
