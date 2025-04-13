@@ -102,20 +102,6 @@ services:
       retries: 3
       start_period: 30s
 
-  #    schema_registry:
-  #        image: confluentinc/cp-schema-registry:${CP_SCHEMA_REGISTRY_VERSION}
-  #        hostname: schema_registry
-  #        container_name: schema_registry
-  #        environment:
-  #            SCHEMA_REGISTRY_HOST_NAME: schema_registry
-  #            SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: kafka-1:19092
-  #            SCHEMA_REGISTRY_LISTENERS: "http://0.0.0.0:8085"
-  #        ports:
-  #            - "8085:8085"
-  #        depends_on:
-  #            kafka-1:
-  #                condition: service_healthy
-
   kafka-connect:
     image: confluentinc/cp-kafka-connect-base:${KAFKA_CONNECT_VERSION}
     hostname: kafka-connect
