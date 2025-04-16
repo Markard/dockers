@@ -1,0 +1,32 @@
+services:
+  pg:
+    image: postgres:${POSTGRESQL_VERSION}
+    hostname: pg
+    container_name: pg
+    environment:
+      POSTGRES_DB: db_name
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - $PWD/docker/pg/init.d:/docker-entrypoint-initdb.d
+      - $PWD/docker/pg/postgresql.conf:/etc/postgresql/postgresql.conf
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U user -d db_name" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+    command: -c "config_file=/etc/postgresql/postgresql.conf"
+
+volumes:
+  pg_data:
